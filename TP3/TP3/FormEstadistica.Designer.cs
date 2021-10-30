@@ -1,5 +1,5 @@
 ﻿
-namespace TP3Formularios
+namespace TP3
 {
     partial class FormEstadistica
     {
@@ -35,6 +35,7 @@ namespace TP3Formularios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "FormEstadistica";
             this.Text = "FormEstadistica";

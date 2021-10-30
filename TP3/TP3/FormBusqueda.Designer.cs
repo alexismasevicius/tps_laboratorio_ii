@@ -39,6 +39,7 @@ namespace TP3
             this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVender = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusqueda)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@ namespace TP3
             this.dataGridBusqueda.RowHeadersWidth = 51;
             this.dataGridBusqueda.RowTemplate.Height = 29;
             this.dataGridBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridBusqueda.Size = new System.Drawing.Size(1053, 344);
+            this.dataGridBusqueda.Size = new System.Drawing.Size(1053, 543);
             this.dataGridBusqueda.TabIndex = 0;
             // 
             // Codigo
@@ -135,19 +136,32 @@ namespace TP3
             this.btnVender.BackColor = System.Drawing.Color.CadetBlue;
             this.btnVender.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnVender.Font = new System.Drawing.Font("Stencil", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnVender.Location = new System.Drawing.Point(407, 390);
+            this.btnVender.Location = new System.Drawing.Point(807, 597);
             this.btnVender.Name = "btnVender";
             this.btnVender.Size = new System.Drawing.Size(258, 64);
             this.btnVender.TabIndex = 1;
             this.btnVender.Text = "VENDER";
             this.btnVender.UseVisualStyleBackColor = false;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Brown;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Stencil", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(12, 597);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(258, 64);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "ELIMINAR";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // FormBusqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1092, 466);
+            this.ClientSize = new System.Drawing.Size(1092, 673);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnVender);
             this.Controls.Add(this.dataGridBusqueda);
             this.Name = "FormBusqueda";
@@ -170,5 +184,6 @@ namespace TP3
         private System.Windows.Forms.DataGridViewTextBoxColumn Año;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.Button btnVender;
+        private System.Windows.Forms.Button button1;
     }
 }

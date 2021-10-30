@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "IdKD8RAqnurGCTHI9+nrpH2xE1B0iiRCmuU5STY3hi5j0dwTPbTkbGa+gJMiqUcvoB9yngkAntvIeseQBDdFOw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP3\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\alexi\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

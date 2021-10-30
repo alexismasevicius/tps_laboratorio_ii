@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BibliotecaDeClases;
 
-namespace TP3Formularios
+namespace TP3
 {
     public partial class FormEstadistica : Form
     {
+
+
+
         public FormEstadistica()
         {
             InitializeComponent();
