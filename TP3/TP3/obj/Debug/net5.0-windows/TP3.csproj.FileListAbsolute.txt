@@ -42,3 +42,4 @@ C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP3\TP3\bin\Debug\net5
 C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP3\TP3\bin\Debug\net5.0-windows\BibliotecaDeClases.pdb
 C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP3\TP3\obj\Debug\net5.0-windows\TP3.csproj.CopyComplete
 C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP3\TP3\obj\Debug\net5.0-windows\TP3.FormEstadistica.resources
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP3\TP3\obj\Debug\net5.0-windows\TP3.FormAgregar.resources

@@ -4,29 +4,29 @@ namespace BibliotecaDeClases
 {
     public class Libro : Producto
     {
-        private string tema;
+        private string genero;
 
 
 
 
         //CONSTRUCTORES
-        public Libro(int codigo, string titulo, string autor, int anio, int stock,int ventas,float precio, string tema)
-            :base(codigo,titulo,autor,anio,stock,ventas,precio)
+        public Libro(string titulo, string autor, int anio, int stock,int ventas,float precio, string tema)
+            :base(titulo,autor,anio,stock,ventas,precio)
         {
-            this.Tema = tema;
+            this.genero = tema;
         }
 
         //PROPIEDADEs
-        public string Tema
+        public string Genero
         {
             get
             {
-                return tema;
+                return genero;
             }
 
             set
             {
-                tema = value;
+                genero = value;
             }
         }
 

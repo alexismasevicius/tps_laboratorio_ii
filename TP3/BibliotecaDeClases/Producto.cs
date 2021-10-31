@@ -8,7 +8,7 @@ namespace BibliotecaDeClases
 {
     public abstract class Producto
     {
-        private int codigo;
+        private string codigo;
         private string titulo;
         private string autor;
         private int anio;
@@ -17,9 +17,8 @@ namespace BibliotecaDeClases
         private float precio;
 
 
-        protected Producto(int codigo, string titulo, string autor, int anio, int stock, int ventas, float precio)
+        protected Producto(string titulo, string autor, int anio, int stock, int ventas, float precio)
         {
-            this.codigo = codigo;
             this.titulo = titulo;
             this.autor = autor;
             this.anio = anio;
@@ -30,7 +29,7 @@ namespace BibliotecaDeClases
         }
 
         //PROPIEDADes
-        public int Codigo
+        public string Codigo
         {
             get
             {

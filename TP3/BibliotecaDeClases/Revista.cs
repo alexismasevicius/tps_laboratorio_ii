@@ -9,8 +9,8 @@ namespace BibliotecaDeClases
     public class Revista : Producto
     {
 
-        public Revista(int codigo, string titulo, string autor, int anio, int stock, int ventas, float precio, string tema)
-        : base(codigo, titulo, autor, anio, stock, ventas, precio)
+        public Revista(string titulo, string autor, int anio, int stock, int ventas, float precio)
+        : base(titulo, autor, anio, stock, ventas, precio)
         {
 
         }

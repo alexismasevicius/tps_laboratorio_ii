@@ -8,15 +8,21 @@ namespace BibliotecaDeClases
 {
     public class Comic:Producto
     {
+        string esManga;
 
-        public Comic(int codigo, string titulo, string autor, int anio, int stock, int ventas, float precio, string tema)
-        : base(codigo, titulo, autor, anio, stock, ventas, precio)
+        
+        // CONSTRUCTOR
+        public Comic(string titulo, string autor, int anio, int stock, int ventas, float precio, string esManga)
+        : base(titulo, autor, anio, stock, ventas, precio)
         {
-            
+            this.EsManga = esManga;
         }
 
+        // PROPIEDADES
+        public string EsManga { get => esManga; set => esManga = value; }
 
 
+        // METODOS
         /// <summary>
         /// Verifica si el libro es igual en titulo y autor
         /// </summary>

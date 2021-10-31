@@ -30,16 +30,10 @@ namespace TP3
         private void InitializeComponent()
         {
             this.dataGridBusqueda = new System.Windows.Forms.DataGridView();
-            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Genero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVender = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.rbtnCatRevistas = new System.Windows.Forms.RadioButton();
+            this.rbtnCatComics = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusqueda)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,93 +44,20 @@ namespace TP3
             this.dataGridBusqueda.BackgroundColor = System.Drawing.Color.CadetBlue;
             this.dataGridBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridBusqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridBusqueda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Codigo,
-            this.Titulo,
-            this.Autor,
-            this.Tema,
-            this.Genero,
-            this.Pais,
-            this.Año,
-            this.Stock});
-            this.dataGridBusqueda.Location = new System.Drawing.Point(12, 26);
+            this.dataGridBusqueda.Location = new System.Drawing.Point(12, 62);
             this.dataGridBusqueda.Name = "dataGridBusqueda";
             this.dataGridBusqueda.RowHeadersWidth = 51;
             this.dataGridBusqueda.RowTemplate.Height = 29;
             this.dataGridBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridBusqueda.Size = new System.Drawing.Size(1053, 543);
+            this.dataGridBusqueda.Size = new System.Drawing.Size(1177, 507);
             this.dataGridBusqueda.TabIndex = 0;
-            // 
-            // Codigo
-            // 
-            this.Codigo.HeaderText = "Codigo";
-            this.Codigo.MinimumWidth = 6;
-            this.Codigo.Name = "Codigo";
-            this.Codigo.ReadOnly = true;
-            this.Codigo.Width = 125;
-            // 
-            // Titulo
-            // 
-            this.Titulo.HeaderText = "Titulo";
-            this.Titulo.MinimumWidth = 6;
-            this.Titulo.Name = "Titulo";
-            this.Titulo.ReadOnly = true;
-            this.Titulo.Width = 125;
-            // 
-            // Autor
-            // 
-            this.Autor.HeaderText = "Autor";
-            this.Autor.MinimumWidth = 6;
-            this.Autor.Name = "Autor";
-            this.Autor.ReadOnly = true;
-            this.Autor.Width = 125;
-            // 
-            // Tema
-            // 
-            this.Tema.HeaderText = "Tema";
-            this.Tema.MinimumWidth = 6;
-            this.Tema.Name = "Tema";
-            this.Tema.ReadOnly = true;
-            this.Tema.Width = 125;
-            // 
-            // Genero
-            // 
-            this.Genero.HeaderText = "Genero";
-            this.Genero.MinimumWidth = 6;
-            this.Genero.Name = "Genero";
-            this.Genero.ReadOnly = true;
-            this.Genero.Width = 125;
-            // 
-            // Pais
-            // 
-            this.Pais.HeaderText = "Pais";
-            this.Pais.MinimumWidth = 6;
-            this.Pais.Name = "Pais";
-            this.Pais.ReadOnly = true;
-            this.Pais.Width = 125;
-            // 
-            // Año
-            // 
-            this.Año.HeaderText = "Año";
-            this.Año.MinimumWidth = 6;
-            this.Año.Name = "Año";
-            this.Año.ReadOnly = true;
-            this.Año.Width = 125;
-            // 
-            // Stock
-            // 
-            this.Stock.HeaderText = "Stock";
-            this.Stock.MinimumWidth = 6;
-            this.Stock.Name = "Stock";
-            this.Stock.ReadOnly = true;
-            this.Stock.Width = 125;
             // 
             // btnVender
             // 
             this.btnVender.BackColor = System.Drawing.Color.CadetBlue;
             this.btnVender.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnVender.Font = new System.Drawing.Font("Stencil", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnVender.Location = new System.Drawing.Point(807, 597);
+            this.btnVender.Location = new System.Drawing.Point(931, 597);
             this.btnVender.Name = "btnVender";
             this.btnVender.Size = new System.Drawing.Size(258, 64);
             this.btnVender.TabIndex = 1;
@@ -155,12 +76,42 @@ namespace TP3
             this.button1.Text = "ELIMINAR";
             this.button1.UseVisualStyleBackColor = false;
             // 
+            // rbtnCatRevistas
+            // 
+            this.rbtnCatRevistas.AutoSize = true;
+            this.rbtnCatRevistas.Checked = true;
+            this.rbtnCatRevistas.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbtnCatRevistas.Location = new System.Drawing.Point(12, 22);
+            this.rbtnCatRevistas.Name = "rbtnCatRevistas";
+            this.rbtnCatRevistas.Size = new System.Drawing.Size(181, 24);
+            this.rbtnCatRevistas.TabIndex = 3;
+            this.rbtnCatRevistas.TabStop = true;
+            this.rbtnCatRevistas.Text = "CATALOGO REVISTAS";
+            this.rbtnCatRevistas.UseVisualStyleBackColor = true;
+            this.rbtnCatRevistas.Visible = false;
+            this.rbtnCatRevistas.CheckedChanged += new System.EventHandler(this.rbtnCatRevistas_CheckedChanged);
+            // 
+            // rbtnCatComics
+            // 
+            this.rbtnCatComics.AutoSize = true;
+            this.rbtnCatComics.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbtnCatComics.Location = new System.Drawing.Point(199, 22);
+            this.rbtnCatComics.Name = "rbtnCatComics";
+            this.rbtnCatComics.Size = new System.Drawing.Size(169, 24);
+            this.rbtnCatComics.TabIndex = 4;
+            this.rbtnCatComics.Text = "CATALOGO COMICS";
+            this.rbtnCatComics.UseVisualStyleBackColor = true;
+            this.rbtnCatComics.Visible = false;
+            this.rbtnCatComics.CheckedChanged += new System.EventHandler(this.rbtnCatComics_CheckedChanged);
+            // 
             // FormBusqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1092, 673);
+            this.ClientSize = new System.Drawing.Size(1204, 673);
+            this.Controls.Add(this.rbtnCatComics);
+            this.Controls.Add(this.rbtnCatRevistas);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnVender);
             this.Controls.Add(this.dataGridBusqueda);
@@ -169,21 +120,16 @@ namespace TP3
             this.Load += new System.EventHandler(this.FormBusqueda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusqueda)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridBusqueda;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Titulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Autor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Genero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pais;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Año;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
         private System.Windows.Forms.Button btnVender;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton rbtnCatRevistas;
+        private System.Windows.Forms.RadioButton rbtnCatComics;
     }
 }
