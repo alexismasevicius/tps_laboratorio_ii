@@ -1,0 +1,1 @@
+[{"Genero":"novela","Codigo":"L1","Titulo":"En busca del tiempo perdido","Autor":"Proust, Marcel","Anio":1922,"Stock":2,"Ventas":0,"Precio":2000},{"Genero":"novela","Codigo":"L2","Titulo":"La metamorfosis","Autor":"Kafka, Franz","Anio":1915,"Stock":5,"Ventas":0,"Precio":800}]

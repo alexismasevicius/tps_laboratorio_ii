@@ -1,0 +1,1 @@
+[{"Codigo":"R1","Titulo":"National Geographic 44","Autor":"NatGeo","Anio":2021,"Stock":20,"Ventas":0,"Precio":300},{"Codigo":"R2","Titulo":"Caras y caretas","Autor":"La Nacion","Anio":1991,"Stock":3,"Ventas":0,"Precio":20},{"Codigo":"R3","Titulo":"Club Play","Autor":"Club Play","Anio":2002,"Stock":10,"Ventas":0,"Precio":30}]

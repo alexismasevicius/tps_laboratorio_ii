@@ -10,10 +10,10 @@ namespace BibliotecaDeClases
 
 
         //CONSTRUCTORES
-        public Libro(string titulo, string autor, int anio, int stock,int ventas,float precio, string tema)
-            :base(titulo,autor,anio,stock,ventas,precio)
+        public Libro(string titulo, string autor, int anio, int stock,int ventas,float precio, string genero)
+            : base(titulo, autor, anio, stock, ventas, precio)
         {
-            this.genero = tema;
+            this.genero = genero;
         }
 
         //PROPIEDADEs

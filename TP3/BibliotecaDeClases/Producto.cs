@@ -117,6 +117,28 @@ namespace BibliotecaDeClases
         //METODOS
 
         /// <summary>
+        /// Vende una unidad del producto
+        /// </summary>
+        /// <param name="miProducto"></param>
+        /// <returns>True si habia stock, false si no lo había </returns>
+        public bool Vender()
+        {
+            if (this.stock > 0)
+            {
+                this.Stock--;
+                this.ventas++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+
+        /// <summary>
         /// Muestra el titulo, autor y anio en formato string
         /// </summary>
         /// <returns>string con los datos</returns>

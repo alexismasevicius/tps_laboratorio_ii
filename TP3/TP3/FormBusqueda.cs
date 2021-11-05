@@ -11,69 +11,63 @@ using BibliotecaDeClases;
 
 namespace TP3
 {
-    public partial class FormBusqueda : Form
+    public partial class FormBusqueda<T>: Form
     {
-        Libreria miLibreria;
-        Revisteria miRevisteria;
-        bool esBusqueda;
-        bool esLibreria;
-        bool esRevista;
-        public FormBusqueda(Revisteria miRevisteria, bool esBusqueda, bool esRevista)
+        List<T> miLista;
+
+
+        /// <summary>
+        /// Constructor de formulario de busqueda. Muestra los objetos de una lista pasada por parametros
+        /// </summary>
+        /// <param name="miLista">Lista generica</param>
+        public FormBusqueda(List<T> miLista)
         {
             InitializeComponent();
-            this.miRevisteria = miRevisteria;
-            this.esBusqueda = esBusqueda;
-            this.esLibreria = false;
-            this.esRevista = esRevista;
+            this.miLista = miLista;
+            
         }
 
-        public FormBusqueda(Libreria miLibreria, bool esBusqueda)
-        {
-            InitializeComponent();
-            this.miLibreria = miLibreria;
-            this.esBusqueda = esBusqueda;
-            this.esLibreria = true;
-        }
 
+
+        /// <summary>
+        /// Carga del formulario y muestra de datos de lista
+        /// </summary>
         private void FormBusqueda_Load(object sender, EventArgs e)
         {
-            if (esLibreria)
+            this.dataGridBusqueda.DataSource = miLista;
+        }
+
+        private void btnVender_Click(object sender, EventArgs e)
+        {
+            try
             {
-                CargarDatosLibreria();
+                Producto miProducto = (Producto)this.dataGridBusqueda.SelectedRows[0].DataBoundItem;
+                if (miProducto.Vender())
+                {
+                    MessageBox.Show($"Venta Exitosa. El total a pagar por el producto: --{miProducto.Titulo}-- es de: ${miProducto.Precio} ");
+                }
+                else
+                {
+                    MessageBox.Show($"No hay stock del producto seleccionado");
+                }
             }
-            else
+            catch (Exception)
             {
-                rbtnCatComics.Show();
-                rbtnCatRevistas.Show();
-                CargarDatosRevisteria();
+                MessageBox.Show($"Error al acceder a la base de datos");
             }
-
+            RefrescarDataGrid();
         }
 
-        /// <summary>
-        /// Carga los datos de la libreria al dataGrid
-        /// </summary>
-        private void CargarDatosLibreria()
+
+        private void RefrescarDataGrid()
         {
-            this.dataGridBusqueda.DataSource = miLibreria.ListaLibros;
+            this.dataGridBusqueda.DataSource = null;
+            this.dataGridBusqueda.DataSource = this.miLista;
         }
 
-        /// <summary>
-        /// Carga los datos de la Revisteria al datagrid
-        /// </summary>
-        private void CargarDatosRevisteria()
+        private void button1_Click(object sender, EventArgs e)
         {
-            this.dataGridBusqueda.DataSource = miRevisteria.ListaRevistas;
-        }
-
-        private void rbtnCatComics_CheckedChanged(object sender, EventArgs e)
-        {
-            this.dataGridBusqueda.DataSource = miRevisteria.ListaComics;
-        }
-
-        private void rbtnCatRevistas_CheckedChanged(object sender, EventArgs e)
-        {
-            this.dataGridBusqueda.DataSource = miRevisteria.ListaRevistas;
+            this.Close();
         }
     }
 }

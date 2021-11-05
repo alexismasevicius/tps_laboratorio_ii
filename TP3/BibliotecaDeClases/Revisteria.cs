@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BibliotecaDeClases
 {
-    public class Revisteria
+    public class Revisteria : IAbrirGuardar<List<Revista>>, IAbrirGuardar<List<Comic>>
     {
         private List<Revista> listaRevistas;
         private List<Comic> listaComics;
         private int lastIdRevista;
         private int lastIdComic;
+        private string rutaDeArchivo;
 
         public Revisteria()
         {
@@ -27,6 +30,10 @@ namespace BibliotecaDeClases
             {
                 return listaRevistas;
             }
+            set
+            {
+                this.listaRevistas = value;
+            }
         }
         public List<Comic> ListaComics
         {
@@ -34,7 +41,25 @@ namespace BibliotecaDeClases
             {
                 return listaComics;
             }
+            set
+            {
+                this.listaComics = value;
+            }
         }
+
+        public string RutaDeArchivo
+        {
+            get
+            {
+                return this.rutaDeArchivo;
+            }
+            set
+            {
+                this.rutaDeArchivo = value;
+            }
+
+        }
+
 
         /// <summary>
         /// Agrega una nueva a la lista y lo guarda en el archivo JSON especificado
@@ -42,7 +67,7 @@ namespace BibliotecaDeClases
         /// <param name="miRevista">Revista a agregar</param>
         /// <param name="path">Direccion para guardar el archivo JSON</param>
         /// <returns>TRUE si fue agregado con exito, FALSE si hubo un error o si el libro ya se encuentra en la lista</returns>
-        public bool AgregarProducto(Revista miRevista, string path)
+        public bool AgregarProducto(Revista miRevista)
         {
 
             if (miRevista is null || this.listaRevistas.Contains(miRevista))
@@ -53,14 +78,14 @@ namespace BibliotecaDeClases
             try
             {
                 this.lastIdRevista++;
-                miRevista.Codigo = String.Format($"L{this.lastIdRevista}");
+                miRevista.Codigo = String.Format($"R{this.lastIdRevista}");
 
                 this.listaRevistas.Add(miRevista);
                 return true;
             }
             catch (Exception e)
             {
-                throw new Exception("Error al guardar los datos de la revista", e);
+                throw new BibliotecaException("Error al agregar los datos del libro", "Revisteria", "Agregar Producto", e);
             }
         }
 
@@ -70,7 +95,7 @@ namespace BibliotecaDeClases
         /// <param name="miComic">Comic a agregar</param>
         /// <param name="path">Direccion para guardar el archivo JSON</param>
         /// <returns>TRUE si fue agregado con exito, FALSE si hubo un error o si el libro ya se encuentra en la lista</returns>
-        public bool AgregarProducto(Comic miComic, string path)
+        public bool AgregarProducto(Comic miComic)
         {
 
             if (miComic is null || this.listaComics.Contains(miComic))
@@ -81,7 +106,7 @@ namespace BibliotecaDeClases
             try
             {
                 this.lastIdComic++;
-                miComic.Codigo = String.Format($"L{lastIdComic}");
+                miComic.Codigo = String.Format($"C{lastIdComic}");
 
                 this.listaComics.Add(miComic);
 
@@ -124,6 +149,86 @@ namespace BibliotecaDeClases
             return false;
         }
 
+        /// <summary>
+        /// guarda  un archivo de texto en formato JSON con datos de revistas
+        /// </summary>
+        /// <param name="miLista">Lista revistas a guardar</param>
+        public void Guardar(List<Revista>miLista)
+        {
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
+                {
+                    string json = JsonSerializer.Serialize(this.ListaRevistas);
+                    streamWriter.Write(json);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new BibliotecaException("Error al guardar la base de datos", "Revisteria", "Guardar", e);
+            }
+        }
 
+        /// <summary>
+        /// guarda  un archivo de texto en formato JSON con datos de comics
+        /// </summary>
+        /// <param name="lista">Lista comics a guardar</param>
+        public void Guardar(List<Comic> lista)
+        {
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
+                {
+                    string json = JsonSerializer.Serialize(lista);
+                    streamWriter.Write(json);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new BibliotecaException("Error al guardar la base de datos", "Revisteria", "Guardar", e);
+            }
+
+        }
+
+        public List<Revista> Leer()
+        {
+            try
+            {
+                List<Revista> miLista = new List<Revista>();
+
+                StreamReader sw = new StreamReader(this.RutaDeArchivo);
+                string strAux = sw.ReadToEnd();
+                sw.Close();
+                miLista = JsonSerializer.Deserialize<List<Revista>>(strAux);
+                return miLista;
+            }
+            catch (Exception e)
+            {
+
+                throw new BibliotecaException("Error en la lectura del archivo", "Revisteria,", "Leer", e);
+            }
+
+        }
+
+
+        List<Comic> IAbrirGuardar<List<Comic>>.Leer()
+        {
+            try
+            {
+                List<Comic> miLista = new List<Comic>();
+
+                StreamReader sw = new StreamReader(this.RutaDeArchivo);
+                string strAux = sw.ReadToEnd();
+                sw.Close();
+                miLista = JsonSerializer.Deserialize<List<Comic>>(strAux);
+                return miLista;
+            }
+            catch (Exception e)
+            {
+
+                throw new BibliotecaException("Error en la lectura del archivo", "Revisteria,", "Leer", e);
+            }
+
+        }
     }
 }

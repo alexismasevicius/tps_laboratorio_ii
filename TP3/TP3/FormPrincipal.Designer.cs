@@ -29,31 +29,30 @@ namespace TP3
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.rbtnTitulo = new System.Windows.Forms.RadioButton();
             this.rbtnAutor = new System.Windows.Forms.RadioButton();
             this.rbtnAnio = new System.Windows.Forms.RadioButton();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEstadisticas = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnMostrarCatalogo = new System.Windows.Forms.Button();
             this.btnMostrarRevisteria = new System.Windows.Forms.Button();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtBusqueda
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(31, 92);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(659, 30);
-            this.textBox1.TabIndex = 0;
+            this.txtBusqueda.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtBusqueda.Location = new System.Drawing.Point(31, 92);
+            this.txtBusqueda.Name = "txtBusqueda";
+            this.txtBusqueda.Size = new System.Drawing.Size(659, 30);
+            this.txtBusqueda.TabIndex = 0;
             // 
             // rbtnTitulo
             // 
@@ -115,39 +114,6 @@ namespace TP3
             this.menuStrip1.Size = new System.Drawing.Size(859, 28);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirToolStripMenuItem,
-            this.guardarToolStripMenuItem,
-            this.guardarComoToolStripMenuItem});
-            this.archivoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
-            this.archivoToolStripMenuItem.Text = "Archivo";
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.abrirToolStripMenuItem.Text = "Abrir";
-            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
-            // 
-            // guardarToolStripMenuItem
-            // 
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.guardarToolStripMenuItem.Text = "Guardar";
-            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
-            // 
-            // guardarComoToolStripMenuItem
-            // 
-            this.guardarComoToolStripMenuItem.Name = "guardarComoToolStripMenuItem";
-            this.guardarComoToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.guardarComoToolStripMenuItem.Text = "Guardar como...";
-            this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.guardarComoToolStripMenuItem_Click);
             // 
             // btnEstadisticas
             // 
@@ -226,6 +192,31 @@ namespace TP3
             this.cmbTipo.TabIndex = 13;
             this.cmbTipo.Text = "Seleccionar";
             // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.abrirToolStripMenuItem.Text = "Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
+            // guardarToolStripMenuItem
+            // 
+            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.guardarToolStripMenuItem.Text = "Guardar";
+            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirToolStripMenuItem,
+            this.guardarToolStripMenuItem});
+            this.archivoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -241,11 +232,12 @@ namespace TP3
             this.Controls.Add(this.rbtnAnio);
             this.Controls.Add(this.rbtnAutor);
             this.Controls.Add(this.rbtnTitulo);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtBusqueda);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "FormPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -257,21 +249,20 @@ namespace TP3
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBusqueda;
         private System.Windows.Forms.RadioButton rbtnTitulo;
         private System.Windows.Forms.RadioButton rbtnAutor;
         private System.Windows.Forms.RadioButton rbtnAnio;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guardarComoToolStripMenuItem;
         private System.Windows.Forms.Button btnEstadisticas;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnMostrarCatalogo;
         private System.Windows.Forms.Button btnMostrarRevisteria;
         private System.Windows.Forms.ComboBox cmbTipo;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
     }
 }
 

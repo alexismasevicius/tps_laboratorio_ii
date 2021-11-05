@@ -29,14 +29,26 @@ namespace TP3
         /// </summary>
         private void InitializeComponent()
         {
+            this.lstboxEstadisticas = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
+            // 
+            // lstboxEstadisticas
+            // 
+            this.lstboxEstadisticas.BackColor = System.Drawing.Color.CadetBlue;
+            this.lstboxEstadisticas.FormattingEnabled = true;
+            this.lstboxEstadisticas.ItemHeight = 20;
+            this.lstboxEstadisticas.Location = new System.Drawing.Point(40, 25);
+            this.lstboxEstadisticas.Name = "lstboxEstadisticas";
+            this.lstboxEstadisticas.Size = new System.Drawing.Size(682, 404);
+            this.lstboxEstadisticas.TabIndex = 0;
             // 
             // FormEstadistica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(774, 450);
+            this.Controls.Add(this.lstboxEstadisticas);
             this.Name = "FormEstadistica";
             this.Text = "FormEstadistica";
             this.Load += new System.EventHandler(this.FormEstadistica_Load);
@@ -45,5 +57,7 @@ namespace TP3
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox lstboxEstadisticas;
     }
 }
