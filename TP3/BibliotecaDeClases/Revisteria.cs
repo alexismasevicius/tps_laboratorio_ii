@@ -12,16 +12,13 @@ namespace BibliotecaDeClases
     {
         private List<Revista> listaRevistas;
         private List<Comic> listaComics;
-        private int lastIdRevista;
-        private int lastIdComic;
+
         private string rutaDeArchivo;
 
         public Revisteria()
         {
             this.listaRevistas = new List<Revista>();
             this.listaComics = new List<Comic>();
-            this.lastIdComic = 0;
-            this.lastIdRevista = 0;
         }
 
         public List<Revista> ListaRevistas
@@ -62,6 +59,66 @@ namespace BibliotecaDeClases
 
 
         /// <summary>
+        /// Busca el ultimo Id de la lista
+        /// </summary>
+        /// <returns>El ultimo Id mas uno en formato strin</returns>
+        private string BuscarIdMayorMasUnoRevista()
+        {
+            string strAux;
+            int codigo = 1;
+            int codigoMayor = 0;
+
+            if (this.ListaRevistas.Count > 0)
+            {
+                foreach (Revista item in this.ListaRevistas)
+                {
+                    strAux = item.Codigo.Trim('R');
+
+                    int.TryParse(strAux, out codigo);
+
+                    if (codigo > codigoMayor)
+                    {
+                        codigoMayor = codigo;
+                    }
+                }
+            }
+
+            return string.Format($"R{codigoMayor + 1}");
+
+        }
+
+
+
+        /// <summary>
+        /// Busca el ultimo Id de la lista
+        /// </summary>
+        /// <returns>El ultimo Id mas uno en formato strin</returns>
+        private string BuscarIdMayorMasUnoComic()
+        {
+            string strAux;
+            int codigo = 1;
+            int codigoMayor = 0;
+
+            if (this.ListaComics.Count > 0)
+            {
+                foreach (Comic item in this.ListaComics)
+                {
+                    strAux = item.Codigo.Trim('C');
+
+                    int.TryParse(strAux, out codigo);
+
+                    if (codigo > codigoMayor)
+                    {
+                        codigoMayor = codigo;
+                    }
+                }
+            }
+
+            return string.Format($"C{codigoMayor + 1}");
+
+        }
+
+        /// <summary>
         /// Agrega una nueva a la lista y lo guarda en el archivo JSON especificado
         /// </summary>
         /// <param name="miRevista">Revista a agregar</param>
@@ -77,9 +134,7 @@ namespace BibliotecaDeClases
 
             try
             {
-                this.lastIdRevista++;
-                miRevista.Codigo = String.Format($"R{this.lastIdRevista}");
-
+                miRevista.Codigo = BuscarIdMayorMasUnoRevista();
                 this.listaRevistas.Add(miRevista);
                 return true;
             }
@@ -105,8 +160,7 @@ namespace BibliotecaDeClases
 
             try
             {
-                this.lastIdComic++;
-                miComic.Codigo = String.Format($"C{lastIdComic}");
+                miComic.Codigo = BuscarIdMayorMasUnoComic();
 
                 this.listaComics.Add(miComic);
 
@@ -210,7 +264,10 @@ namespace BibliotecaDeClases
 
         }
 
-
+        /// <summary>
+        /// Lee un archivo en formato json
+        /// </summary>
+        /// <returns>La lista con los elementos</returns>
         List<Comic> IAbrirGuardar<List<Comic>>.Leer()
         {
             try
@@ -230,5 +287,97 @@ namespace BibliotecaDeClases
             }
 
         }
+
+
+
+        /// <summary>
+        /// Busca la revista mas vendido
+        /// </summary>
+        /// <returns>La primer revista más vendida de la lista</returns>
+        public Revista BuscarRevistaMasVendida()
+        {
+            Revista miRevista = null;
+            bool flag = false;
+            foreach (Revista item in this.ListaRevistas)
+            {
+                if (flag == false)
+                {
+                    miRevista = item;
+                    flag = true;
+                }
+                else
+                {
+                    if (item.Ventas > miRevista.Ventas)
+                    {
+                        miRevista = item;
+                    }
+                }
+            }
+            return miRevista;
+        }
+
+
+
+        /// <summary>
+        /// Busca el comic mas vendido
+        /// </summary>
+        /// <returns>El primer comic más vendido de la lista</returns>
+        public Comic BuscarComicMasVendido()
+        {
+            Comic miComic = null;
+            bool flag = false;
+            foreach (Comic item in this.ListaComics)
+            {
+                if (flag == false)
+                {
+                    miComic = item;
+                    flag = true;
+                }
+                else
+                {
+                    if (item.Ventas > miComic.Ventas)
+                    {
+                        miComic = item;
+                    }
+                }
+            }
+            return miComic;
+        }
+
+        /// <summary>
+        /// Calcula los ingresos por ventas de revsitas
+        /// </summary>
+        /// <returns>Los ingresos por ventas de revistas</returns>
+        public float CalcularVentasRevista()
+        {
+            float acumuladorVentas = 0;
+            foreach (Revista item in this.listaRevistas)
+            {
+                if (item.Ventas > 0)
+                {
+                    acumuladorVentas = acumuladorVentas + (item.Ventas * item.Precio);
+                }
+            }
+            return acumuladorVentas;
+        }
+
+        /// <summary>
+        /// Calcula los ingresos por ventas de comics
+        /// </summary>
+        /// <returns>Los ingresos por ventas de revistas comics</returns>
+        public float CalcularVentasComic()
+        {
+            float acumuladorVentas = 0;
+            foreach (Comic item in this.listaComics)
+            {
+                if (item.Ventas > 0)
+                {
+                    acumuladorVentas = acumuladorVentas + (item.Ventas*item.Precio);
+                }
+            }
+            return acumuladorVentas;
+        }
+
+
     }
 }

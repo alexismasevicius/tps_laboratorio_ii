@@ -50,6 +50,7 @@ namespace TP3
             this.ClientSize = new System.Drawing.Size(774, 450);
             this.Controls.Add(this.lstboxEstadisticas);
             this.Name = "FormEstadistica";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormEstadistica";
             this.Load += new System.EventHandler(this.FormEstadistica_Load);
             this.ResumeLayout(false);

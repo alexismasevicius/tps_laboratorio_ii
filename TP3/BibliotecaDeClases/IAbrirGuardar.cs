@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BibliotecaDeClases
 {
-    public interface IAbrirGuardar<T> where T: class
+    ///Implementacion de generics
+    public interface IAbrirGuardar<T>
     {
         string RutaDeArchivo
         {

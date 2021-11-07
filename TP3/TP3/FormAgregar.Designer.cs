@@ -272,6 +272,7 @@ namespace TP3
             this.Controls.Add(this.lblTipoProducto);
             this.MaximizeBox = false;
             this.Name = "FormAgregar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAgregar";
             this.Load += new System.EventHandler(this.FormAgregar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericStock)).EndInit();

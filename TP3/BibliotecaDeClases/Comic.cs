@@ -24,14 +24,14 @@ namespace BibliotecaDeClases
 
         // METODOS
         /// <summary>
-        /// Verifica si el libro es igual en titulo y autor
+        /// Verifica si el libro es igual
         /// </summary>
         /// <param name="libro">primer libro</param>
         /// <param name="otroLibro">otro libro</param>
         /// <returns>TRUE si es igual, FALSE si no lo es</returns>
         public static bool operator ==(Comic libro, Comic otroLibro)
         {
-            if (libro.Autor == otroLibro.Autor && libro.Titulo == otroLibro.Titulo)
+            if (libro.Codigo == otroLibro.Codigo)
             {
                 return true;
             }
@@ -43,7 +43,7 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
-        /// Sobrecarga de Equals. Si tienen el mismo autor y titulo son iguales
+        /// Sobrecarga de Equals.
         /// </summary>
         /// <param name="obj">objeto a comparar</param>
         /// <returns>True si es igual, FALSE si no lo es</returns>

@@ -11,13 +11,11 @@ namespace BibliotecaDeClases
     public class Libreria: IAbrirGuardar<List<Libro>>
     {
         private List<Libro> listaLibros;
-        private int lastId;
         private string rutaDeArchivo;
 
         public Libreria()
         {
             this.listaLibros = new List<Libro>();
-            this.lastId = 0;
         }
 
         public List<Libro> ListaLibros
@@ -49,6 +47,35 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
+        /// Busca el ultimo Id de la lista
+        /// </summary>
+        /// <returns>El ultimo Id mas uno en formato strin</returns>
+        private string BuscarIdMayorMasUno()
+        {
+            string strAux;
+            int codigo = 1;
+            int codigoMayor = 0;
+
+            if (this.ListaLibros.Count > 0)
+            {
+                foreach (Libro item in this.listaLibros)
+                {
+                    strAux = item.Codigo.Trim('L');
+
+                    int.TryParse(strAux, out codigo);
+
+                    if (codigo > codigoMayor)
+                    {
+                        codigoMayor = codigo;
+                    }
+                }
+            }
+
+            return string.Format($"L{codigoMayor+1}");
+
+        }
+
+        /// <summary>
         /// Agrega un nuevo libro a la lista y lo guarda en el archivo JSON especificado
         /// </summary>
         /// <param name="miLibro">Libro a agregar</param>
@@ -64,8 +91,7 @@ namespace BibliotecaDeClases
             
             try
             {
-                this.lastId++;
-                miLibro.Codigo = String.Format($"L{lastId}");
+                miLibro.Codigo = BuscarIdMayorMasUno();
                 this.listaLibros.Add(miLibro);              
                 return true;
             }
@@ -91,7 +117,7 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
-        /// Guarda un archivo .txt serializado en json
+        /// Guarda un archivo .txt serializado en json // IMPLEMENTACION DE EXCEPCIONES y DE ARCHIVOS Y SERIALIZACION
         /// </summary>
         public void Guardar(List<Libro> miLista)
         {
@@ -100,7 +126,7 @@ namespace BibliotecaDeClases
                 using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
                 {
                     string json = JsonSerializer.Serialize(miLista);
-                    streamWriter.Write(json);          
+                    streamWriter.Write(json);
                 }
             }
             catch (Exception e)
@@ -109,6 +135,7 @@ namespace BibliotecaDeClases
             }
 
         }
+
 
 
         /// <summary>
@@ -127,9 +154,12 @@ namespace BibliotecaDeClases
                 miLista = JsonSerializer.Deserialize <List<Libro>>(strAux);
                 return miLista;
             }
+            catch (FileNotFoundException e)
+            {
+                throw new BibliotecaException("El archivo no se encontro", "Libreria,", "Leer", e);
+            }
             catch (Exception e)
             {
-
                 throw new BibliotecaException("Error en la lectura del archivo","Libreria,","Leer",e);
             }
 
@@ -137,6 +167,49 @@ namespace BibliotecaDeClases
         }
 
 
+        /// <summary>
+        /// Busca el libro mas vendido
+        /// </summary>
+        /// <returns>El primer libro más vendido de la lista</returns>
+        public Libro BuscarLibroMasVendido()
+        {
+            Libro miLibro = null;
+            bool flag = false;
+            foreach (Libro item in this.ListaLibros)
+            {
+                if (flag == false)
+                {
+                    miLibro = item;
+                    flag = true;
+                }
+                else
+                {
+                    if (item.Ventas > miLibro.Ventas)
+                    {
+                        miLibro = item;
+                    }
+                }
+
+            }
+            return miLibro;
+        }
+
+        /// <summary>
+        /// Calcula los ingresos por ventas de libros
+        /// </summary>
+        /// <returns>Los ingresos por ventas de libros</returns>
+        public float CalcularVentasLibros()
+        {
+            float acumuladorVentas = 0;
+            foreach (Libro item in this.listaLibros)
+            {
+                if (item.Ventas > 0)
+                {
+                    acumuladorVentas = acumuladorVentas + (item.Ventas * item.Precio);
+                }
+            }
+            return acumuladorVentas;
+        }
 
     }
 }

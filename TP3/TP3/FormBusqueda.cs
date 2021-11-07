@@ -11,6 +11,7 @@ using BibliotecaDeClases;
 
 namespace TP3
 {
+    //IMPLEMENTACION DE GENERICS
     public partial class FormBusqueda<T>: Form
     {
         List<T> miLista;
@@ -37,6 +38,9 @@ namespace TP3
             this.dataGridBusqueda.DataSource = miLista;
         }
 
+        /// <summary>
+        /// Click en el boton vender
+        /// </summary>
         private void btnVender_Click(object sender, EventArgs e)
         {
             try
@@ -65,6 +69,9 @@ namespace TP3
             this.dataGridBusqueda.DataSource = this.miLista;
         }
 
+        /// <summary>
+        /// Click en el boton SALIR
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();

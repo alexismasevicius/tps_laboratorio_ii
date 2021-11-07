@@ -144,7 +144,7 @@ namespace BibliotecaDeClases
         /// <returns>string con los datos</returns>
         public override string ToString()
         {
-            return String.Format($"{this.Titulo},{this.Autor},{this.Anio}");
+            return String.Format($"{this.Titulo} , {this.Autor}, {this.Anio} ");
         }
 
 

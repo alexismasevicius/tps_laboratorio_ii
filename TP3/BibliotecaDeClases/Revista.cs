@@ -16,14 +16,14 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
-        /// Verifica si el libro es igual en titulo y autor
+        /// Verifica si el libro es igual
         /// </summary>
         /// <param name="libro">primer libro</param>
         /// <param name="otroLibro">otro libro</param>
         /// <returns>TRUE si es igual, FALSE si no lo es</returns>
         public static bool operator ==(Revista libro, Revista otroLibro)
         {
-            if (libro.Autor == otroLibro.Autor && libro.Titulo == otroLibro.Titulo)
+            if (libro.Codigo == otroLibro.Codigo)
             {
                 return true;
             }

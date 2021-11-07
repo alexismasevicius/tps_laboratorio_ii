@@ -6,9 +6,6 @@ namespace BibliotecaDeClases
     {
         private string genero;
 
-
-
-
         //CONSTRUCTORES
         public Libro(string titulo, string autor, int anio, int stock,int ventas,float precio, string genero)
             : base(titulo, autor, anio, stock, ventas, precio)
@@ -41,7 +38,7 @@ namespace BibliotecaDeClases
         /// <returns>TRUE si es igual, FALSE si no lo es</returns>
         public static bool operator ==(Libro libro, Libro otroLibro)
         {
-            if (libro.Autor == otroLibro.Autor && libro.Titulo == otroLibro.Titulo)
+            if (libro.Codigo == otroLibro.Codigo)
             {
                 return true;
             }
