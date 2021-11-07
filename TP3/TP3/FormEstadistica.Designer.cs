@@ -51,7 +51,7 @@ namespace TP3
             this.Controls.Add(this.lstboxEstadisticas);
             this.Name = "FormEstadistica";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormEstadistica";
+            this.Text = "Estadisticas";
             this.Load += new System.EventHandler(this.FormEstadistica_Load);
             this.ResumeLayout(false);
 

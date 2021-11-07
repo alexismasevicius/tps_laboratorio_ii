@@ -36,6 +36,7 @@ namespace TP3
         private void FormBusqueda_Load(object sender, EventArgs e)
         {
             this.dataGridBusqueda.DataSource = miLista;
+            this.dataGridBusqueda.ReadOnly = true;
         }
 
         /// <summary>

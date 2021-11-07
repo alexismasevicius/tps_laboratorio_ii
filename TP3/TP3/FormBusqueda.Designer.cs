@@ -87,7 +87,7 @@ namespace TP3
             this.Controls.Add(this.dataGridBusqueda);
             this.Name = "FormBusqueda";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Productos";
             this.Load += new System.EventHandler(this.FormBusqueda_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridBusqueda)).EndInit();
             this.ResumeLayout(false);
