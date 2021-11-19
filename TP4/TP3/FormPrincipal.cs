@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BibliotecaDeClases;
@@ -16,6 +17,12 @@ namespace TP3
 
         Revisteria miRevisteria = new Revisteria();
         Libreria miLibreria = new Libreria();
+
+        CancellationTokenSource cancellationTokenSource;
+
+        CancellationToken cancellationToken;
+
+
 
         /*
         Comic comic1 = new Comic("Spider-Man #230", "Stan Lee", 2001, 3, 0, 500, "no");
@@ -31,7 +38,39 @@ namespace TP3
         /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
+                miLibreria.ListaVentas = miLibreria.Leer();
+                miRevisteria.RutaDeArchivo = "RecibosRevisteria.txt";
+                miRevisteria.ListaVentas = miRevisteria.Leer();
+            }
+            catch (BibliotecaException f)
+            {
+                MessageBox.Show($"{f.Message},\n En clase: {f.NombreClase}, Metodo: {f.NombreMetodo} \n {f.InnerException.Message}");
+            }
 
+            this.miLibreria.InformarVenta += ActualizarVentas;
+            cancellationTokenSource = new CancellationTokenSource();
+            this.cancellationToken = cancellationTokenSource.Token;
+            Task.Run(() => miLibreria.InformarVentasRealizadas(cancellationToken));
+
+
+        }
+
+        public void ActualizarVentas(object sender)
+        {
+            if (this.InvokeRequired)
+            {
+                InformacionDeVenta callback = new InformacionDeVenta(this.ActualizarVentas);
+                object[] objs = new object[] { sender };
+                this.Invoke(callback, objs);
+            }
+            else
+            {
+                this.lblRecaudacionInicio.Text = $"Recaudacion Total : {miLibreria.ListaVentas.Count}";
+                this.lblVentasInicio.Text = $"Ventas Totales : {miLibreria.ListaVentas.Count}";
+            }
         }
 
 
@@ -78,44 +117,43 @@ namespace TP3
         }
 
         /// <summary>
-        /// Click en el boton abrir de la barra
+        /// Click en el boton ABRIR ARCHIVO VENTAS de la barra
         /// </summary>
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //ESTO HAY QUE CAMBIARLO POR SELECCIONAR RUTA DE ARCHIVO
+            /*
             if (MessageBox.Show($"¿Está seguro que desea abrir un archivo? \nPerderá todos los cambios realizados hasta el momento.",
         "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 try
                 {
-                    miLibreria.RutaDeArchivo = "archivoLibroSerializado.txt";
-                    miLibreria.ListaLibros = miLibreria.Leer();
-                    miRevisteria.RutaDeArchivo = "archivoRevistaSerializado.txt";
-                    miRevisteria.ListaRevistas = miRevisteria.Leer();
-                    miRevisteria.RutaDeArchivo = "archivoComicSerializado.txt";
-                    miRevisteria.ListaComics = ((IAbrirGuardar<List<Comic>>)miRevisteria).Leer();
+                    miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
+                    miLibreria.ListaVentas = miLibreria.Leer();
+                    miRevisteria.RutaDeArchivo = "RecibosRevisteria.txt";
+                    miRevisteria.ListaVentas = miRevisteria.Leer();
                 }
                 catch (BibliotecaException f)
                 {
                     MessageBox.Show($"{f.Message},\n En clase: {f.NombreClase}, Metodo: {f.NombreMetodo} \n {f.InnerException.Message}");
                 }
-            }
+            }*/
         }
 
         /// <summary>
-        /// Click en el boton guardar de la barra
+        /// Click en el boton GUARDAR ARCHIVO VENTAS de la barra
         /// </summary>
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"¿Está seguro que desea guardar? \nEsta acción sobreescribirá los datos previamente guardados",
+            if (MessageBox.Show($"¿Está seguro que desea guardar las ventas?",
                     "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 try
                 {
-                    miLibreria.Guardar(miLibreria.ListaLibros);
-                    miRevisteria.RutaDeArchivo = "archivoComicSerializado.txt";
-                    miRevisteria.Guardar(miRevisteria.ListaComics);
-                    miRevisteria.RutaDeArchivo = "archivoRevistaSerializado.txt";
-                    miRevisteria.Guardar(miRevisteria.ListaRevistas);
+                    miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
+                    miLibreria.Guardar(miLibreria.ListaVentas);
+                    miRevisteria.RutaDeArchivo = "RecibosRevisteria.txt";
+                    miRevisteria.Guardar(miRevisteria.ListaVentas);
                 }
                 catch (BibliotecaException f)
                 {
@@ -222,6 +260,11 @@ namespace TP3
             }
             FormBusqueda<Revista> miFormComic = new FormBusqueda<Revista>(listaFiltrada,miRevisteria.ListaVentas, this.miRevisteria.ListaCliente);
             miFormComic.ShowDialog();
+        }
+
+        private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
 
         //////////////////////  FIN DE BUSQUEDA  //////////////////////////////////////////////////////////////////

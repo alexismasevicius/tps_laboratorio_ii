@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BibliotecaDeClases
 {
-    public class Revisteria : IAbrirGuardar<List<Revista>>, IAbrirGuardar<List<Comic>>
+    public class Revisteria : IAbrirGuardar<List<Venta>>
     {
         private List<Revista> listaRevistas;
         private List<Comic> listaComics;
@@ -234,89 +234,48 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
-        /// guarda  un archivo de texto en formato JSON con datos de revistas
+        /// guarda  un archivo de texto en formato JSON con datos de ventas
         /// </summary>
-        /// <param name="miLista">Lista revistas a guardar</param>
-        public void Guardar(List<Revista>miLista)
+        /// <param name="miLista">Lista ventas a guardar</param>
+        public void Guardar(List<Venta>miLista)
         {
             try
             {
-                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
+                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo,true))
                 {
-                    string json = JsonSerializer.Serialize(this.ListaRevistas);
+                    string json = JsonSerializer.Serialize(this.ListaVentas);
                     streamWriter.Write(json);
                 }
             }
             catch (Exception e)
             {
-                throw new BibliotecaException("Error al guardar la base de datos", "Revisteria", "Guardar", e);
+                throw new BibliotecaException("Error al guardar las ventas en el archivo", "Revisteria", "Guardar", e);
             }
         }
 
         /// <summary>
-        /// guarda  un archivo de texto en formato JSON con datos de comics
+        /// Lee un archivo de ventas
         /// </summary>
-        /// <param name="lista">Lista comics a guardar</param>
-        public void Guardar(List<Comic> lista)
+        /// <returns>lista con las ventas</returns>
+        public List<Venta> Leer()
         {
             try
             {
-                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
-                {
-                    string json = JsonSerializer.Serialize(lista);
-                    streamWriter.Write(json);
-                }
-            }
-            catch (Exception e)
-            {
-                throw new BibliotecaException("Error al guardar la base de datos", "Revisteria", "Guardar", e);
-            }
-
-        }
-
-        public List<Revista> Leer()
-        {
-            try
-            {
-                List<Revista> miLista = new List<Revista>();
+                List<Venta> miLista = new List<Venta>();
 
                 StreamReader sw = new StreamReader(this.RutaDeArchivo);
                 string strAux = sw.ReadToEnd();
                 sw.Close();
-                miLista = JsonSerializer.Deserialize<List<Revista>>(strAux);
+                miLista = JsonSerializer.Deserialize<List<Venta>>(strAux);
                 return miLista;
             }
             catch (Exception e)
             {
-
                 throw new BibliotecaException("Error en la lectura del archivo", "Revisteria,", "Leer", e);
             }
 
         }
 
-        /// <summary>
-        /// Lee un archivo en formato json
-        /// </summary>
-        /// <returns>La lista con los elementos</returns>
-        List<Comic> IAbrirGuardar<List<Comic>>.Leer()
-        {
-            try
-            {
-                List<Comic> miLista = new List<Comic>();
-
-                StreamReader sw = new StreamReader(this.RutaDeArchivo);
-                string strAux = sw.ReadToEnd();
-                sw.Close();
-                miLista = JsonSerializer.Deserialize<List<Comic>>(strAux);
-                return miLista;
-            }
-            catch (Exception e)
-            {
-
-                throw new BibliotecaException("Error en la lectura del archivo", "Revisteria,", "Leer", e);
-            }
-
-        }
 
 
 

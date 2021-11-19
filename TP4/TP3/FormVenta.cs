@@ -47,10 +47,11 @@ namespace TP3
                     int.TryParse(this.txtDNI.Text, out int dniValido);
                     Cliente cliente = new Cliente(dniValido, txtNombre.Text, txtApellido.Text, (Genero)cbmGenero.SelectedItem, (int)numEdad.Value);
                     listaClientes.Add(cliente);
+                    this.miCliente = cliente;
                 }
                 MessageBox.Show($"El total a pagar por el producto: --{miProducto.Titulo}-- es de: ${miProducto.Precio} ");  
                 
-                //GENERAR COMPROBANTE
+                //GENERAR COMPROBANTE?????
 
                 Venta miVenta = new Venta(miProducto.Precio, miCliente);
                 this.listaVentas.Add(miVenta);

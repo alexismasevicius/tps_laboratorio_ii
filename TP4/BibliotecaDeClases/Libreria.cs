@@ -4,23 +4,31 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BibliotecaDeClases
 {
-    public class Libreria: IAbrirGuardar<List<Libro>>
+    public delegate void InformacionDeVenta(object sender);
+
+    public class Libreria : IAbrirGuardar<List<Venta>>
     {
         private List<Libro> listaLibros;
         private List<Venta> listaVentas;
         private List<Cliente> listaCliente;
+        private int contadorVentas;
+        public event InformacionDeVenta InformarVenta;
+
 
         private string rutaDeArchivo;
 
+       
         public Libreria()
         {
             this.listaLibros = new List<Libro>();
             this.listaVentas = new List<Venta>();
             this.listaCliente = new List<Cliente>();
+            this.contadorVentas = 0;
         }
 
         public List<Libro> ListaLibros
@@ -102,7 +110,7 @@ namespace BibliotecaDeClases
                 }
             }
 
-            return string.Format($"L{codigoMayor+1}");
+            return string.Format($"L{codigoMayor + 1}");
 
         }
 
@@ -116,19 +124,19 @@ namespace BibliotecaDeClases
         {
 
             if (miLibro is null || this.listaLibros.Contains(miLibro))
-            {  
+            {
                 return false;
             }
-            
+
             try
             {
                 miLibro.Codigo = BuscarIdMayorMasUno();
-                this.listaLibros.Add(miLibro);              
+                this.listaLibros.Add(miLibro);
                 return true;
             }
             catch (Exception e)
             {
-                throw new BibliotecaException("Error al agregar los datos del libro","Libreria","Agregar Producto", e);
+                throw new BibliotecaException("Error al agregar los datos del libro", "Libreria", "Agregar Producto", e);
             }
         }
 
@@ -147,42 +155,41 @@ namespace BibliotecaDeClases
             return false;
         }
 
+
         /// <summary>
-        /// Guarda un archivo .txt serializado en json // IMPLEMENTACION DE EXCEPCIONES y DE ARCHIVOS Y SERIALIZACION
+        /// guarda  un archivo de texto en formato JSON con datos de ventas
         /// </summary>
-        public void Guardar(List<Libro> miLista)
+        /// <param name="miLista">Lista ventas a guardar</param>
+        public void Guardar(List<Venta> miLista)
         {
             try
             {
-                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
+                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo, true))
                 {
-                    string json = JsonSerializer.Serialize(miLista);
+                    string json = JsonSerializer.Serialize(this.ListaVentas);
                     streamWriter.Write(json);
                 }
             }
             catch (Exception e)
             {
-                throw new BibliotecaException("Error al guardar la base de datos","Libreria","Guardar",e);
+                throw new BibliotecaException("Error al guardar las ventas en el archivo", "Revisteria", "Guardar", e);
             }
-
         }
 
-
-
         /// <summary>
-        /// Lee un archivo .txt serializado en json
+        /// Lee un archivo de ventas
         /// </summary>
-        /// <returns>La lista de libros</returns>
-        public List<Libro> Leer()
+        /// <returns>lista con las ventas</returns>
+        public List<Venta> Leer()
         {
             try
             {
-                List<Libro> miLista = new List<Libro>();
+                List<Venta> miLista = new List<Venta>();
 
                 StreamReader sw = new StreamReader(this.RutaDeArchivo);
                 string strAux = sw.ReadToEnd();
                 sw.Close();
-                miLista = JsonSerializer.Deserialize <List<Libro>>(strAux);
+                miLista = JsonSerializer.Deserialize<List<Venta>>(strAux);
                 return miLista;
             }
             catch (FileNotFoundException e)
@@ -191,11 +198,11 @@ namespace BibliotecaDeClases
             }
             catch (Exception e)
             {
-                throw new BibliotecaException("Error en la lectura del archivo","Libreria,","Leer",e);
+                throw new BibliotecaException("Error en la lectura del archivo", "Libreria,", "Leer", e);
             }
 
-
         }
+
 
 
         /// <summary>
@@ -241,6 +248,26 @@ namespace BibliotecaDeClases
             }
             return acumuladorVentas;
         }
+
+
+        public void InformarVentasRealizadas(CancellationToken cancellationToken)
+        {
+            do
+            {
+                if(this.contadorVentas<this.ListaVentas.Count)
+                {
+                    if (this.InformarVenta is not null)
+                    {
+                        this.InformarVenta.Invoke(this);
+                    }
+                    this.contadorVentas = this.ListaVentas.Count;
+                }
+                System.Threading.Thread.Sleep(1000);
+            }while (!cancellationToken.IsCancellationRequested);
+
+        }
+
+
 
     }
 }
