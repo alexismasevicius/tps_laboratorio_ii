@@ -34,17 +34,11 @@ namespace TP3
             this.rbtnAutor = new System.Windows.Forms.RadioButton();
             this.rbtnAnio = new System.Windows.Forms.RadioButton();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEstadisticas = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnMostrarCatalogo = new System.Windows.Forms.Button();
             this.BusquedaGB = new System.Windows.Forms.GroupBox();
-            this.lblRecaudacionInicio = new System.Windows.Forms.Label();
             this.lblVentasInicio = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
             this.BusquedaGB.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,43 +99,6 @@ namespace TP3
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.Color.CadetBlue;
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(846, 28);
-            this.menuStrip1.TabIndex = 8;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirToolStripMenuItem,
-            this.guardarToolStripMenuItem});
-            this.archivoToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
-            this.archivoToolStripMenuItem.Text = "Archivos de ventas";
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-            this.abrirToolStripMenuItem.Text = "Abrir archivo de ventas";
-            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
-            // 
-            // guardarToolStripMenuItem
-            // 
-            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-            this.guardarToolStripMenuItem.Text = "Guardar archivo de ventas";
-            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
-            // 
             // btnEstadisticas
             // 
             this.btnEstadisticas.BackColor = System.Drawing.Color.CadetBlue;
@@ -198,22 +155,12 @@ namespace TP3
             this.BusquedaGB.Controls.Add(this.rbtnAutor);
             this.BusquedaGB.Controls.Add(this.rbtnAnio);
             this.BusquedaGB.Controls.Add(this.btnBuscar);
-            this.BusquedaGB.Location = new System.Drawing.Point(12, 31);
+            this.BusquedaGB.Location = new System.Drawing.Point(11, 12);
             this.BusquedaGB.Name = "BusquedaGB";
             this.BusquedaGB.Size = new System.Drawing.Size(823, 93);
             this.BusquedaGB.TabIndex = 14;
             this.BusquedaGB.TabStop = false;
             this.BusquedaGB.Text = "Busqueda";
-            // 
-            // lblRecaudacionInicio
-            // 
-            this.lblRecaudacionInicio.AutoSize = true;
-            this.lblRecaudacionInicio.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblRecaudacionInicio.Location = new System.Drawing.Point(317, 219);
-            this.lblRecaudacionInicio.Name = "lblRecaudacionInicio";
-            this.lblRecaudacionInicio.Size = new System.Drawing.Size(255, 19);
-            this.lblRecaudacionInicio.TabIndex = 17;
-            this.lblRecaudacionInicio.Text = "Recaudacion desde el inicio: 0$";
             // 
             // lblVentasInicio
             // 
@@ -221,9 +168,9 @@ namespace TP3
             this.lblVentasInicio.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblVentasInicio.Location = new System.Drawing.Point(18, 219);
             this.lblVentasInicio.Name = "lblVentasInicio";
-            this.lblVentasInicio.Size = new System.Drawing.Size(180, 19);
+            this.lblVentasInicio.Size = new System.Drawing.Size(148, 19);
             this.lblVentasInicio.TabIndex = 18;
-            this.lblVentasInicio.Text = "Ventas desde inicio: 0";
+            this.lblVentasInicio.Text = "Ventas Totales : 0";
             // 
             // FormPrincipal
             // 
@@ -232,21 +179,16 @@ namespace TP3
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(846, 238);
             this.Controls.Add(this.lblVentasInicio);
-            this.Controls.Add(this.lblRecaudacionInicio);
             this.Controls.Add(this.BusquedaGB);
             this.Controls.Add(this.btnMostrarCatalogo);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnEstadisticas);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "FormPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Libreria UTN";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.BusquedaGB.ResumeLayout(false);
             this.BusquedaGB.PerformLayout();
             this.ResumeLayout(false);
@@ -261,15 +203,10 @@ namespace TP3
         private System.Windows.Forms.RadioButton rbtnAutor;
         private System.Windows.Forms.RadioButton rbtnAnio;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Button btnEstadisticas;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnMostrarCatalogo;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.GroupBox BusquedaGB;
-        private System.Windows.Forms.Label lblRecaudacionInicio;
         private System.Windows.Forms.Label lblVentasInicio;
     }
 }

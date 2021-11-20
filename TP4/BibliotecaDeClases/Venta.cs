@@ -32,13 +32,13 @@ namespace BibliotecaDeClases
         public DateTime Fecha { get => fecha; set => fecha = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
         public Libro Libro { get => libro; set => libro = value; }
-        public string RutaDeArchivo
+        private string RutaDeArchivo
         {
             get
             {
                 StringBuilder str = new StringBuilder();
                 str.Append(Environment.GetFolderPath(Environment.SpecialFolder.Desktop).ToString());
-                str.Append(@$"\Factura {DateTime.Now.ToString()}");
+                str.Append(@$"\Factura Cliente {this.Cliente.Dni}.txt");
                 return str.ToString();
             }
         }

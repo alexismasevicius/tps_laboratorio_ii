@@ -15,16 +15,28 @@ namespace TP3
     public partial class FormBusqueda<T>: Form
     {
         Libreria miLibreria;
+        string sqlCommand;
 
         /// <summary>
-        /// Constructor de formulario de busqueda. Muestra los objetos de una lista pasada por parametros
+        /// Constructor de formulario de busqueda. 
         /// </summary>
-        /// <param name="miLista">Lista generica</param>
+        /// <param name="miLibreria">libreria a mostrar</param>
         public FormBusqueda(Libreria miLibreria)
         {
             InitializeComponent();
             this.miLibreria = miLibreria;
         }
+
+        /// <summary>
+        /// Constructor de formulario de busqueda CON FILTROS.
+        /// </summary>
+        /// <param name="miLibreria">libreria a mostrar</param>
+        /// <param name="sqlCommand">comando sql para filtrar</param>
+        public FormBusqueda(Libreria miLibreria, string sqlCommand):this(miLibreria)
+        {
+            this.sqlCommand = sqlCommand;
+        }
+
 
 
 
@@ -33,10 +45,10 @@ namespace TP3
         /// </summary>
         private void FormBusqueda_Load(object sender, EventArgs e)
         {
+            this.dataGridBusqueda.ReadOnly = true;
             try
             {
-                this.dataGridBusqueda.DataSource = miLibreria.ConsultaBaseDatos();
-                this.dataGridBusqueda.ReadOnly = true;
+                RefrescarDataGrid();             
             }
             catch (BibliotecaException exc)
             {
@@ -46,18 +58,30 @@ namespace TP3
         }
 
         /// <summary>
-        /// Click en el boton VENDER
+        /// Click en el boton VENDER. Modifica la base de datos y guarda archivo json con datos de clientes y ventas
         /// </summary>
         private void btnVender_Click(object sender, EventArgs e)
         {
             try
             {
-                if(dataGridBusqueda.SelectedRows[0].Cells[0].Value is not null)
+                
+                if (dataGridBusqueda.SelectedRows[0].Cells[0].Value is not null)
                 {
-                    Libro miLibro = miLibreria.ConsultaBaseDatosLibro((int)dataGridBusqueda.SelectedRows[0].Cells[0].Value);
+                    int code = (int)dataGridBusqueda.SelectedRows[0].Cells[0].Value;
+                    Libro miLibro = miLibreria.ConsultaBaseDatosLibro(code);
+                    miLibro.Codigo = code;
                     if (miLibro.Stock>0)
                     {
                         FormVenta formVenta = new FormVenta(miLibro, miLibreria.ListaCliente, miLibreria.ListaVentas);
+                        formVenta.ShowDialog();
+                        if(formVenta.DialogResult == DialogResult.OK)
+                        {
+                            miLibreria.VenderProducto(miLibro.Codigo);
+                            miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
+                            miLibreria.Guardar(miLibreria.ListaVentas);
+                            miLibreria.RutaDeArchivo = "ListaClientes.txt";
+                            miLibreria.Guardar(miLibreria.ListaCliente);
+                        }
                     }
                     else
                     {
@@ -76,8 +100,17 @@ namespace TP3
 
         private void RefrescarDataGrid()
         {
-            this.dataGridBusqueda.DataSource = null;
-            this.dataGridBusqueda.DataSource = miLibreria.ConsultaBaseDatos();
+            if(this.sqlCommand is null)
+            {
+                this.dataGridBusqueda.DataSource = null;
+                this.dataGridBusqueda.DataSource = miLibreria.ConsultaBaseDatos();
+            }
+            else
+            {
+                this.dataGridBusqueda.DataSource = null;
+                this.dataGridBusqueda.DataSource = miLibreria.ConsultaBaseDatos(sqlCommand);
+            }
+
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace TP3
         }
 
         /// <summary>
-        /// Click en el boton VENDER. Concreta la venta. Crea un cliente si no existia en la BD
+        /// Click en el boton VENDER. Concreta la venta. Crea un cliente si no existia en la DB. Guarda recibo en Escritorio
         /// </summary>
         private void btnAgregar_Click(object sender, EventArgs e)
         {       
@@ -45,14 +45,12 @@ namespace TP3
                 if(this.miCliente == null)
                 {
                     int.TryParse(this.txtDNI.Text, out int dniValido);
-                    Cliente cliente = new Cliente(dniValido, txtNombre.Text, txtApellido.Text, (Genero)cbmGenero.SelectedItem, (int)numEdad.Value);
-                    listaClientes.Add(cliente);
-                    this.miCliente = cliente;
+                    this.miCliente = new Cliente(dniValido, txtNombre.Text, txtApellido.Text, (Genero)cbmGenero.SelectedItem, (int)numEdad.Value);
+                    listaClientes.Add(this.miCliente);
                 }
-                MessageBox.Show($"El total a pagar por el producto: --{miProducto.Titulo}-- es de: ${miProducto.Precio} ");  
+                MessageBox.Show($"El total a pagar por el producto: --{miProducto.Titulo}-- es de: ${miProducto.Precio} ");
                
-
-                Venta miVenta = new Venta((Libro)miProducto, miCliente);
+                Venta miVenta = new Venta((Libro)miProducto, this.miCliente);
                 
                 this.listaVentas.Add(miVenta);
                 miVenta.Guardar();
@@ -66,6 +64,10 @@ namespace TP3
 
         }
 
+
+        /// <summary>
+        /// Cierra el formulario
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

@@ -22,7 +22,6 @@ namespace TP3
 
         CancellationToken cancellationToken;
 
-        private OpenFileDialog openFileDialog;
 
         public FormPrincipal()
         {
@@ -37,8 +36,9 @@ namespace TP3
             try
             {
                 miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
-                miLibreria.ListaVentas = miLibreria.Leer();
-
+                miLibreria.ListaVentas = miLibreria.Leer<Venta>();
+                miLibreria.RutaDeArchivo = "ListaClientes.txt";
+                miLibreria.ListaCliente = miLibreria.Leer<Cliente>();
             }
             catch (BibliotecaException f)
             {
@@ -50,7 +50,6 @@ namespace TP3
             this.cancellationToken = cancellationTokenSource.Token;
             Task.Run(() => miLibreria.InformarVentasRealizadas(cancellationToken));
 
-            openFileDialog = new OpenFileDialog();
 
         }
 
@@ -68,7 +67,6 @@ namespace TP3
             }
             else
             {
-                this.lblRecaudacionInicio.Text = $"Recaudacion Total : {00000000000}";
                 this.lblVentasInicio.Text = $"Ventas Totales : {miLibreria.ListaVentas.Count}";
             }
         }
@@ -104,52 +102,6 @@ namespace TP3
 
 
 
-        /// <summary>
-        /// Click en el boton ABRIR ARCHIVO VENTAS de la barra
-        /// </summary>
-        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show($"¿Está seguro que desea abrir un archivo? \nPerderá todos los cambios realizados hasta el momento.",
-                "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        miLibreria.RutaDeArchivo = openFileDialog.FileName;
-                        miLibreria.ListaVentas = miLibreria.Leer();
-                    }
-                    catch (BibliotecaException f)
-                    {
-                        MessageBox.Show($"{f.Message},\n En clase: {f.NombreClase}, Metodo: {f.NombreMetodo} \n {f.InnerException.Message}");
-                    }
-                }
-            }
-        }
-
-
-
-        /// <summary>
-        /// Click en el boton GUARDAR ARCHIVO VENTAS de la barra
-        /// </summary>
-        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show($"¿Está seguro que desea guardar las ventas realizadas?",
-                    "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                try
-                {
-                    miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
-                    miLibreria.Guardar(miLibreria.ListaVentas);
-                }
-                catch (BibliotecaException f)
-                {
-                    MessageBox.Show($"{f.Message},\n En clase: {f.NombreClase}, Metodo: {f.NombreMetodo} \n {f.InnerException.Message}");
-                }
-            }
-        }
-
-
 
 
 
@@ -160,32 +112,33 @@ namespace TP3
         /// </summary>
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            //CargarListaFiltrada(this.miLibreria.ListaLibros);
+            CargarListaFiltrada();
         }
 
-   /*     /// <summary>
+       /// <summary>
         /// Carga una lista filtrada por el criterio de busqueda
         /// </summary>
         /// <param name="miLista">Lista a filtrar</param>
-        private void CargarListaFiltrada(List<Libro> miLista)
+        private void CargarListaFiltrada()
         {
-            List<Libro> listaFiltrada = new List<Libro>();
-
             if (rbtnTitulo.Checked)
             {
-                listaFiltrada = miLista.Where(libro => libro.Titulo.Contains(txtBusqueda.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                FormBusqueda<Libro> miFormLibros = new FormBusqueda<Libro>(this.miLibreria, $"SELECT * FROM Libros WHERE titulo LIKE '%{txtBusqueda.Text}%'");
+                miFormLibros.ShowDialog();
             }
             else if (rbtnAutor.Checked)
             {
-                listaFiltrada = miLista.Where(libro => libro.Autor.Contains(txtBusqueda.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                FormBusqueda<Libro> miFormLibros = new FormBusqueda<Libro>(this.miLibreria, $"SELECT * FROM Libros WHERE autor LIKE '%{txtBusqueda.Text}%'");
+                miFormLibros.ShowDialog();
             }
             else
             {
-                listaFiltrada = miLista.Where(libro => libro.Anio.ToString() == txtBusqueda.Text).ToList();
+                int numero = 1;
+                int.TryParse(txtBusqueda.Text, out numero);
+                FormBusqueda<Libro> miFormLibros = new FormBusqueda<Libro>(this.miLibreria, $"SELECT * FROM Libros WHERE anio = {numero}");
+                miFormLibros.ShowDialog();
             }
-            FormBusqueda<Libro> miFormLibros = new FormBusqueda<Libro>(listaFiltrada);
-            miFormLibros.ShowDialog();
-        }*/
+        }
 
 
 

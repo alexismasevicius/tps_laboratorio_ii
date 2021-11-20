@@ -13,7 +13,7 @@ namespace BibliotecaDeClases
 {
     public delegate void InformacionDeVenta(object sender);
 
-    public class Libreria : IAbrirGuardar<List<Venta>>
+    public class Libreria : IAbrirGuardar
     {
         private List<Venta> listaVentas;
         private List<Cliente> listaCliente;
@@ -22,10 +22,6 @@ namespace BibliotecaDeClases
         private string rutaDeArchivo;
         SqlConnection conn;
         SqlCommand command;
-
-
-
-
 
 
        
@@ -110,6 +106,32 @@ namespace BibliotecaDeClases
             }
         }
 
+
+        /// <summary>
+        /// Hace una consulta de todos los elementos de la base de datos por el comando de parametros
+        /// </summary>
+        /// <returns>DataTable con los datos</returns>
+        public DataTable ConsultaBaseDatos(string consulta)
+        {
+            try
+            {
+                command.CommandText = consulta;
+                conn.Open();
+                SqlDataAdapter data = new SqlDataAdapter(command);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
+            }
+            catch (Exception ex)
+            {
+                throw new BibliotecaException("Error al consultar Base de datos", "Libreria", "ConsultaBaseDatos", ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         /// <summary>
         /// Consulta un libro especifico de la base de datos por el codigo
         /// </summary>
@@ -133,8 +155,6 @@ namespace BibliotecaDeClases
                     float precio = (float)Convert.ToDouble(sqlReader["precio"]);
                     string genero = sqlReader["genero"].ToString();
 
-                   
-
                     miLibro = new Libro(titulo,autor,anio,stock,ventas,precio,genero);
                     miLibro.Codigo = codigo;
                 }
@@ -154,10 +174,9 @@ namespace BibliotecaDeClases
 
 
         /// <summary>
-        /// Agrega un nuevo libro a la lista y lo guarda en el archivo JSON especificado
+        /// Agrega un nuevo libro a la lista y lo guarda en la Base de datos
         /// </summary>
         /// <param name="miLibro">Libro a agregar</param>
-        /// <param name="path">Direccion para guardar el archivo JSON</param>
         /// <returns>TRUE si fue agregado con exito, FALSE si hubo un error o si el libro ya se encuentra en la lista</returns>
         public bool AgregarProducto(Libro miLibro)
         {
@@ -188,17 +207,49 @@ namespace BibliotecaDeClases
         }
 
 
+
+
+        /// <summary>
+        /// Concreta la venta y le agrega una venta al libro especificado
+        /// </summary>
+        /// <param name="codigo">codigo del libro</param>
+        /// <returns>TRUE si fue agregado con exito, FALSE si hubo un error o si el libro ya se encuentra en la lista</returns>
+        public bool VenderProducto(int codigo)
+        {
+
+
+            command.CommandText =
+            $"UPDATE Libros SET ventas = ventas + 1, stock = stock - 1 WHERE Codigo = {codigo}";
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new BibliotecaException("Error en Venta", "Libreria", "Agregar Producto", e);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
         /// <summary>
         /// guarda  un archivo de texto en formato JSON con datos de ventas
         /// </summary>
         /// <param name="miLista">Lista ventas a guardar</param>
-        public void Guardar(List<Venta> miLista)
+        public void Guardar<T>(List<T> miLista)
         {
             try
             {
                 using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
                 {
-                    string json = JsonSerializer.Serialize(this.ListaVentas);
+                    string json = JsonSerializer.Serialize(miLista);
                     streamWriter.Write(json);
                 }
             }
@@ -209,19 +260,18 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
-        /// Lee un archivo de ventas
+        /// Lee un archivo de VENTAS
         /// </summary>
         /// <returns>lista con las ventas</returns>
-        public List<Venta> Leer()
+        public List<T> Leer<T>()
         {
             try
             {
-                List<Venta> miLista = new List<Venta>();
-
+                List<T> miLista = new List<T>();
                 StreamReader sw = new StreamReader(this.RutaDeArchivo);
                 string strAux = sw.ReadToEnd();
                 sw.Close();
-                miLista = JsonSerializer.Deserialize<List<Venta>>(strAux);
+                miLista = JsonSerializer.Deserialize<List<T>>(strAux);
                 return miLista;
             }
             catch (FileNotFoundException e)
@@ -232,11 +282,13 @@ namespace BibliotecaDeClases
             {
                 throw new BibliotecaException("Error en la lectura del archivo", "Libreria,", "Leer", e);
             }
-
         }
 
 
-
+        /// <summary>
+        /// Invoca al evento informar venta cuando sucede una venta
+        /// </summary>
+        /// <param name="cancellationToken">para cancelar el hilo</param>
         public void InformarVentasRealizadas(CancellationToken cancellationToken)
         {
             do
@@ -251,7 +303,6 @@ namespace BibliotecaDeClases
                 }
                 System.Threading.Thread.Sleep(1000);
             }while (!cancellationToken.IsCancellationRequested);
-
         }
 
 

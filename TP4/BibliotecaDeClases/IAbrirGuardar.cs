@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace BibliotecaDeClases
 {
     ///Implementacion de generics
-    public interface IAbrirGuardar<T>
+    public interface IAbrirGuardar
     {
         string RutaDeArchivo
         {
             get;set;
         }
 
-        void Guardar(T lista);
-        T Leer();
+        public void Guardar<T>(List<T> miLista);
+        public List<T> Leer<T>();
 
     }
 }
