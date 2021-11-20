@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,34 +15,32 @@ namespace BibliotecaDeClases
 
     public class Libreria : IAbrirGuardar<List<Venta>>
     {
-        private List<Libro> listaLibros;
         private List<Venta> listaVentas;
         private List<Cliente> listaCliente;
         private int contadorVentas;
         public event InformacionDeVenta InformarVenta;
-
-
         private string rutaDeArchivo;
+        SqlConnection conn;
+        SqlCommand command;
+
+
+
+
+
 
        
         public Libreria()
         {
-            this.listaLibros = new List<Libro>();
             this.listaVentas = new List<Venta>();
             this.listaCliente = new List<Cliente>();
             this.contadorVentas = 0;
-        }
 
-        public List<Libro> ListaLibros
-        {
-            get
-            {
-                return this.listaLibros;
-            }
-            set
-            {
-                this.listaLibros = value;
-            }
+            string connString = @"Data Source=.; Initial Catalog=Libreria; Integrated Security=True";
+            conn = new SqlConnection(connString);
+            command = new SqlCommand();
+            command.CommandType = System.Data.CommandType.Text;
+            command.Connection = conn;
+
         }
 
         /// <summary>
@@ -86,33 +86,72 @@ namespace BibliotecaDeClases
         }
 
         /// <summary>
-        /// Busca el ultimo Id de la lista
+        /// Hace una consulta de todos los elementos de la base de datos
         /// </summary>
-        /// <returns>El ultimo Id mas uno en formato strin</returns>
-        private string BuscarIdMayorMasUno()
+        /// <returns>DataTable con los datos</returns>
+        public DataTable ConsultaBaseDatos()
         {
-            string strAux;
-            int codigo = 1;
-            int codigoMayor = 0;
-
-            if (this.ListaLibros.Count > 0)
+            try
             {
-                foreach (Libro item in this.listaLibros)
-                {
-                    strAux = item.Codigo.Trim('L');
-
-                    int.TryParse(strAux, out codigo);
-
-                    if (codigo > codigoMayor)
-                    {
-                        codigoMayor = codigo;
-                    }
-                }
+                command.CommandText = "SELECT * FROM dbo.Libros";
+                conn.Open();
+                SqlDataAdapter data = new SqlDataAdapter(command);
+                DataTable tabla = new DataTable();
+                data.Fill(tabla);
+                return tabla;
             }
-
-            return string.Format($"L{codigoMayor + 1}");
-
+            catch (Exception ex)
+            {
+                throw new BibliotecaException("Error al consultar Base de datos", "Libreria", "ConsultaBaseDatos", ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
+
+        /// <summary>
+        /// Consulta un libro especifico de la base de datos por el codigo
+        /// </summary>
+        /// <param name="codigo">Codigo del libro</param>
+        /// <returns></returns>
+        public Libro ConsultaBaseDatosLibro(int codigo)
+        {
+            try
+            {
+                Libro miLibro = null;
+                command.CommandText = $"SELECT * FROM dbo.Libros WHERE Codigo={codigo}";
+                conn.Open();
+                SqlDataReader sqlReader = command.ExecuteReader();
+                while (sqlReader.Read())
+                {
+                    string titulo = sqlReader["titulo"].ToString();
+                    string autor = sqlReader["autor"].ToString();
+                    int anio = Convert.ToInt32(sqlReader["anio"]);
+                    int stock = Convert.ToInt32(sqlReader["stock"]);
+                    int ventas = Convert.ToInt32(sqlReader["ventas"]);
+                    float precio = (float)Convert.ToDouble(sqlReader["precio"]);
+                    string genero = sqlReader["genero"].ToString();
+
+                   
+
+                    miLibro = new Libro(titulo,autor,anio,stock,ventas,precio,genero);
+                    miLibro.Codigo = codigo;
+                }
+
+
+                return miLibro;
+            }
+            catch (Exception ex)
+            {
+                throw new BibliotecaException("Error al consultar Base de datos", "Libreria", "ConsultaBaseDatos", ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
 
         /// <summary>
         /// Agrega un nuevo libro a la lista y lo guarda en el archivo JSON especificado
@@ -123,36 +162,29 @@ namespace BibliotecaDeClases
         public bool AgregarProducto(Libro miLibro)
         {
 
-            if (miLibro is null || this.listaLibros.Contains(miLibro))
+            if (miLibro is null)
             {
                 return false;
             }
 
+            command.CommandText =
+            $"INSERT INTO Libros (titulo,autor,anio,stock,ventas,precio,genero) VALUES ('{miLibro.Titulo}','{miLibro.Autor}','{miLibro.Anio}','{miLibro.Stock}','{miLibro.Ventas}','{miLibro.Precio}','{miLibro.Genero}')";
+
             try
             {
-                miLibro.Codigo = BuscarIdMayorMasUno();
-                this.listaLibros.Add(miLibro);
+                conn.Open();
+                command.ExecuteNonQuery();
+
                 return true;
             }
             catch (Exception e)
             {
-                throw new BibliotecaException("Error al agregar los datos del libro", "Libreria", "Agregar Producto", e);
+                throw new BibliotecaException("Error al agregar el libro", "Libreria", "Agregar Producto", e);
             }
-        }
-
-        /// <summary>
-        /// Elimina un objeto libro de la lista
-        /// </summary>
-        /// <param name="miLibro">objeto libro a eliminar</param>
-        /// <returns>TRUE si fue exitoso, FALSE si fallo</returns>
-        public bool EliminarProducto(Libro miLibro)
-        {
-            if (miLibro is not null && this.listaLibros.Contains(miLibro))
+            finally
             {
-                this.listaLibros.Remove(miLibro);
-                return true;
+                conn.Close();
             }
-            return false;
         }
 
 
@@ -164,7 +196,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo, true))
+                using (StreamWriter streamWriter = new StreamWriter(this.RutaDeArchivo))
                 {
                     string json = JsonSerializer.Serialize(this.ListaVentas);
                     streamWriter.Write(json);
@@ -172,7 +204,7 @@ namespace BibliotecaDeClases
             }
             catch (Exception e)
             {
-                throw new BibliotecaException("Error al guardar las ventas en el archivo", "Revisteria", "Guardar", e);
+                throw new BibliotecaException("Error al guardar las ventas en el archivo", "Libreria", "Guardar", e);
             }
         }
 
@@ -203,51 +235,6 @@ namespace BibliotecaDeClases
 
         }
 
-
-
-        /// <summary>
-        /// Busca el libro mas vendido
-        /// </summary>
-        /// <returns>El primer libro más vendido de la lista</returns>
-        public Libro BuscarLibroMasVendido()
-        {
-            Libro miLibro = null;
-            bool flag = false;
-            foreach (Libro item in this.ListaLibros)
-            {
-                if (flag == false)
-                {
-                    miLibro = item;
-                    flag = true;
-                }
-                else
-                {
-                    if (item.Ventas > miLibro.Ventas)
-                    {
-                        miLibro = item;
-                    }
-                }
-
-            }
-            return miLibro;
-        }
-
-        /// <summary>
-        /// Calcula los ingresos por ventas de libros
-        /// </summary>
-        /// <returns>Los ingresos por ventas de libros</returns>
-        public float CalcularVentasLibros()
-        {
-            float acumuladorVentas = 0;
-            foreach (Libro item in this.listaLibros)
-            {
-                if (item.Ventas > 0)
-                {
-                    acumuladorVentas = acumuladorVentas + (item.Ventas * item.Precio);
-                }
-            }
-            return acumuladorVentas;
-        }
 
 
         public void InformarVentasRealizadas(CancellationToken cancellationToken)

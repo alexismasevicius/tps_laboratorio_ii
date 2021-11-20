@@ -41,8 +41,6 @@ namespace TP3
             this.btnEstadisticas = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnMostrarCatalogo = new System.Windows.Forms.Button();
-            this.btnMostrarRevisteria = new System.Windows.Forms.Button();
-            this.cmbTipo = new System.Windows.Forms.ComboBox();
             this.BusquedaGB = new System.Windows.Forms.GroupBox();
             this.lblRecaudacionInicio = new System.Windows.Forms.Label();
             this.lblVentasInicio = new System.Windows.Forms.Label();
@@ -133,15 +131,15 @@ namespace TP3
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(268, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
             this.abrirToolStripMenuItem.Text = "Abrir archivo de ventas";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(268, 26);
-            this.guardarToolStripMenuItem.Text = "Guardar ventas realizadas";
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
+            this.guardarToolStripMenuItem.Text = "Guardar archivo de ventas";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // btnEstadisticas
@@ -152,7 +150,7 @@ namespace TP3
             this.btnEstadisticas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnEstadisticas.Font = new System.Drawing.Font("Cooper Black", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnEstadisticas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnEstadisticas.Location = new System.Drawing.Point(621, 130);
+            this.btnEstadisticas.Location = new System.Drawing.Point(619, 145);
             this.btnEstadisticas.Name = "btnEstadisticas";
             this.btnEstadisticas.Size = new System.Drawing.Size(197, 55);
             this.btnEstadisticas.TabIndex = 9;
@@ -168,7 +166,7 @@ namespace TP3
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAgregar.Font = new System.Drawing.Font("Cooper Black", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnAgregar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnAgregar.Location = new System.Drawing.Point(418, 130);
+            this.btnAgregar.Location = new System.Drawing.Point(317, 145);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(197, 55);
             this.btnAgregar.TabIndex = 10;
@@ -184,7 +182,7 @@ namespace TP3
             this.btnMostrarCatalogo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMostrarCatalogo.Font = new System.Drawing.Font("Cooper Black", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnMostrarCatalogo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMostrarCatalogo.Location = new System.Drawing.Point(215, 130);
+            this.btnMostrarCatalogo.Location = new System.Drawing.Point(18, 145);
             this.btnMostrarCatalogo.Name = "btnMostrarCatalogo";
             this.btnMostrarCatalogo.Size = new System.Drawing.Size(197, 55);
             this.btnMostrarCatalogo.TabIndex = 11;
@@ -192,41 +190,11 @@ namespace TP3
             this.btnMostrarCatalogo.UseVisualStyleBackColor = false;
             this.btnMostrarCatalogo.Click += new System.EventHandler(this.btnMostrarCatalogo_Click);
             // 
-            // btnMostrarRevisteria
-            // 
-            this.btnMostrarRevisteria.BackColor = System.Drawing.Color.CadetBlue;
-            this.btnMostrarRevisteria.CausesValidation = false;
-            this.btnMostrarRevisteria.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
-            this.btnMostrarRevisteria.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMostrarRevisteria.Font = new System.Drawing.Font("Cooper Black", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnMostrarRevisteria.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMostrarRevisteria.Location = new System.Drawing.Point(12, 130);
-            this.btnMostrarRevisteria.Name = "btnMostrarRevisteria";
-            this.btnMostrarRevisteria.Size = new System.Drawing.Size(197, 55);
-            this.btnMostrarRevisteria.TabIndex = 12;
-            this.btnMostrarRevisteria.Text = "MOSTRAR CATALOGO DE REVISTERIA";
-            this.btnMostrarRevisteria.UseVisualStyleBackColor = false;
-            this.btnMostrarRevisteria.Click += new System.EventHandler(this.btnMostrarRevisteria_Click);
-            // 
-            // cmbTipo
-            // 
-            this.cmbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipo.FormattingEnabled = true;
-            this.cmbTipo.Items.AddRange(new object[] {
-            "Libro",
-            "Comic",
-            "Revista"});
-            this.cmbTipo.Location = new System.Drawing.Point(216, 18);
-            this.cmbTipo.Name = "cmbTipo";
-            this.cmbTipo.Size = new System.Drawing.Size(117, 28);
-            this.cmbTipo.TabIndex = 13;
-            // 
             // BusquedaGB
             // 
             this.BusquedaGB.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BusquedaGB.Controls.Add(this.txtBusqueda);
             this.BusquedaGB.Controls.Add(this.rbtnTitulo);
-            this.BusquedaGB.Controls.Add(this.cmbTipo);
             this.BusquedaGB.Controls.Add(this.rbtnAutor);
             this.BusquedaGB.Controls.Add(this.rbtnAnio);
             this.BusquedaGB.Controls.Add(this.btnBuscar);
@@ -241,7 +209,7 @@ namespace TP3
             // 
             this.lblRecaudacionInicio.AutoSize = true;
             this.lblRecaudacionInicio.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblRecaudacionInicio.Location = new System.Drawing.Point(418, 234);
+            this.lblRecaudacionInicio.Location = new System.Drawing.Point(317, 219);
             this.lblRecaudacionInicio.Name = "lblRecaudacionInicio";
             this.lblRecaudacionInicio.Size = new System.Drawing.Size(255, 19);
             this.lblRecaudacionInicio.TabIndex = 17;
@@ -251,7 +219,7 @@ namespace TP3
             // 
             this.lblVentasInicio.AutoSize = true;
             this.lblVentasInicio.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblVentasInicio.Location = new System.Drawing.Point(12, 234);
+            this.lblVentasInicio.Location = new System.Drawing.Point(18, 219);
             this.lblVentasInicio.Name = "lblVentasInicio";
             this.lblVentasInicio.Size = new System.Drawing.Size(180, 19);
             this.lblVentasInicio.TabIndex = 18;
@@ -262,11 +230,10 @@ namespace TP3
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(846, 266);
+            this.ClientSize = new System.Drawing.Size(846, 238);
             this.Controls.Add(this.lblVentasInicio);
             this.Controls.Add(this.lblRecaudacionInicio);
             this.Controls.Add(this.BusquedaGB);
-            this.Controls.Add(this.btnMostrarRevisteria);
             this.Controls.Add(this.btnMostrarCatalogo);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnEstadisticas);
@@ -298,8 +265,6 @@ namespace TP3
         private System.Windows.Forms.Button btnEstadisticas;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnMostrarCatalogo;
-        private System.Windows.Forms.Button btnMostrarRevisteria;
-        private System.Windows.Forms.ComboBox cmbTipo;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;

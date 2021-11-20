@@ -50,11 +50,12 @@ namespace TP3
                     this.miCliente = cliente;
                 }
                 MessageBox.Show($"El total a pagar por el producto: --{miProducto.Titulo}-- es de: ${miProducto.Precio} ");  
-                
-                //GENERAR COMPROBANTE?????
+               
 
-                Venta miVenta = new Venta(miProducto.Precio, miCliente);
+                Venta miVenta = new Venta((Libro)miProducto, miCliente);
+                
                 this.listaVentas.Add(miVenta);
+                miVenta.Guardar();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

@@ -69,3 +69,9 @@ C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\obj\Debug\net5
 C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\obj\Debug\net5.0-windows\TP3.pdb
 C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\obj\Debug\net5.0-windows\TP3.genruntimeconfig.cache
 C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\obj\Debug\net5.0-windows\TP3.FormVenta.resources
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\bin\Debug\net5.0-windows\System.Data.SqlClient.dll
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\bin\Debug\net5.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\bin\Debug\net5.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\bin\Debug\net5.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TP3\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

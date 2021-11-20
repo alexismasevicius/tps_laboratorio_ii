@@ -8,7 +8,7 @@ namespace BibliotecaDeClases
 {
     public abstract class Producto
     {
-        private string codigo;
+        private int codigo;
         private string titulo;
         private string autor;
         private int anio;
@@ -29,7 +29,7 @@ namespace BibliotecaDeClases
         }
 
         //PROPIEDADes
-        public string Codigo
+        public int Codigo
         {
             get
             {
@@ -116,24 +116,6 @@ namespace BibliotecaDeClases
 
         //METODOS
 
-        /// <summary>
-        /// Vende una unidad del producto
-        /// </summary>
-        /// <param name="miProducto"></param>
-        /// <returns>True si habia stock, false si no lo había </returns>
-        public bool Vender()
-        {
-            if (this.stock > 0)
-            {
-                this.Stock--;
-                this.ventas++;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
 
 

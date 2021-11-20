@@ -14,21 +14,16 @@ namespace TP3
     //IMPLEMENTACION DE GENERICS
     public partial class FormBusqueda<T>: Form
     {
-        List<T> miLista;
-        List<Venta> listaVentas;
-        List<Cliente> listaClientes;
-
+        Libreria miLibreria;
 
         /// <summary>
         /// Constructor de formulario de busqueda. Muestra los objetos de una lista pasada por parametros
         /// </summary>
         /// <param name="miLista">Lista generica</param>
-        public FormBusqueda(List<T> miLista, List<Venta> listaVentas, List<Cliente> listaClientes)
+        public FormBusqueda(Libreria miLibreria)
         {
             InitializeComponent();
-            this.miLista = miLista;
-            this.listaVentas = listaVentas;
-            this.listaClientes = listaClientes;
+            this.miLibreria = miLibreria;
         }
 
 
@@ -38,32 +33,38 @@ namespace TP3
         /// </summary>
         private void FormBusqueda_Load(object sender, EventArgs e)
         {
-            this.dataGridBusqueda.DataSource = miLista;
-            this.dataGridBusqueda.ReadOnly = true;
+            try
+            {
+                this.dataGridBusqueda.DataSource = miLibreria.ConsultaBaseDatos();
+                this.dataGridBusqueda.ReadOnly = true;
+            }
+            catch (BibliotecaException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+
         }
 
         /// <summary>
-        /// Click en el boton vender
+        /// Click en el boton VENDER
         /// </summary>
         private void btnVender_Click(object sender, EventArgs e)
         {
             try
             {
-                Producto miProducto = (Producto)this.dataGridBusqueda.SelectedRows[0].DataBoundItem;
-                if (miProducto.Stock > 0)
+                if(dataGridBusqueda.SelectedRows[0].Cells[0].Value is not null)
                 {
-                    FormVenta miFormVenta = new FormVenta(miProducto, listaClientes,listaVentas);
-                    miFormVenta.ShowDialog();
-                    if(miFormVenta.DialogResult == DialogResult.OK)
+                    Libro miLibro = miLibreria.ConsultaBaseDatosLibro((int)dataGridBusqueda.SelectedRows[0].Cells[0].Value);
+                    if (miLibro.Stock>0)
                     {
-                        miProducto.Vender();
-                        MessageBox.Show("Venta Exitosa");
-                    }                    
+                        FormVenta formVenta = new FormVenta(miLibro, miLibreria.ListaCliente, miLibreria.ListaVentas);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"No hay stock del producto seleccionado");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show($"No hay stock del producto seleccionado");
-                }
+
             }
             catch (Exception)
             {
@@ -76,7 +77,7 @@ namespace TP3
         private void RefrescarDataGrid()
         {
             this.dataGridBusqueda.DataSource = null;
-            this.dataGridBusqueda.DataSource = this.miLista;
+            this.dataGridBusqueda.DataSource = miLibreria.ConsultaBaseDatos();
         }
 
         /// <summary>
