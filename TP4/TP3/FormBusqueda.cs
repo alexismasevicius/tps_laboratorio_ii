@@ -76,11 +76,19 @@ namespace TP3
                         formVenta.ShowDialog();
                         if(formVenta.DialogResult == DialogResult.OK)
                         {
-                            miLibreria.VenderProducto(miLibro.Codigo);
-                            miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
-                            miLibreria.Guardar(miLibreria.ListaVentas);
-                            miLibreria.RutaDeArchivo = "ListaClientes.txt";
-                            miLibreria.Guardar(miLibreria.ListaCliente);
+                            try
+                            {                                
+                                miLibreria.RutaDeArchivo = "ListaClientes.txt";
+                                miLibreria.Guardar(miLibreria.ListaCliente);
+                                miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
+                                miLibreria.Guardar(miLibreria.ListaVentas);
+                                miLibreria.VenderProducto(miLibro.Codigo);
+                            }
+                            catch(Exception)
+                            {
+                                MessageBox.Show("Error al guardar los datos de la venta");
+                            }
+
                         }
                     }
                     else

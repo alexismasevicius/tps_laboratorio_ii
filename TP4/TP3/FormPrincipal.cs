@@ -33,6 +33,7 @@ namespace TP3
         /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             try
             {
                 miLibreria.RutaDeArchivo = "RecibosLibreria.txt";
