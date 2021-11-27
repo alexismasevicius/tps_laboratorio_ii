@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OMLftMx5iDTO6dxBFnMD0bjc6S1wqSVn0whIUX1YkEyofByW+s89CQTFuEEkUKt4FfscqANinLJny1v/BysQog==",
+  "dgSpecHash": "y774ao8jbpz6ZkCbUZl1vj/TWhM0iH2s9J6nX0g9H9JggSlyP723aQ73KQqp1CIq52q93GNZxjaeIAh8uotp9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\TestLibreria\\TestLibreria.csproj",
+  "projectFilePath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\TestLibreria\\TestLibreria.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alexi\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\alexi\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",

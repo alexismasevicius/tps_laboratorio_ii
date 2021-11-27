@@ -29,8 +29,16 @@ namespace TP3
 
         private void FormEstadistica_Load(object sender, EventArgs e)
         {
+            try
+            {
+                MostrarEstadisticas();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al consultar los datos");
+                this.Close();
+            }
 
-            MostrarEstadisticas();
             
         }
 

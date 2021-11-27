@@ -514,11 +514,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\TP3\\TP3.csproj",
+      "projectUniqueName": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\TP3\\TP3.csproj",
       "projectName": "TP3",
-      "projectPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\TP3\\TP3.csproj",
+      "projectPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\TP3\\TP3.csproj",
       "packagesPath": "C:\\Users\\alexi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\TP3\\obj\\",
+      "outputPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\TP3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alexi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -535,8 +535,8 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "projectReferences": {
-            "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
-              "projectPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
+            "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+              "projectPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
             }
           }
         }

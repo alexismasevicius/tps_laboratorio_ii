@@ -7,39 +7,36 @@ namespace TestLibreria
     public class TestLibreria
     {
         [TestMethod]
-        public void Liberia_ValidaQueSeAgreguenLosElementos()
+        public void Libro_ValidaLibroEsIgual()
         {
 
             //Arrange
-
-            Libreria miLibreria = new Libreria();
-            Libro libro1 = new Libro("En busca del tiempo perdido", "Proust, Marcel", 1922, 2, 0, 2000, "novela");
-            Libro libro2 = new Libro("La metamorfosis", "Kafka, Franz", 1915, 5, 0, 800, "novela");
+            Libro miLibro = new Libro("Libro", "Autor", 2002, 1,1, 100, "novela");
+            Libro otroLibro = new Libro("Libro2", "Autor2", 2002, 1, 1, 100, "novela2");
 
             //Act
-            miLibreria.AgregarProducto(libro1);
-            miLibreria.AgregarProducto(libro2);
+            miLibro.Codigo = 1;
+            otroLibro.Codigo = 1;
 
             //Assert
-            
+            Assert.AreEqual(miLibro, otroLibro);
 
         }
 
 
         [TestMethod]
-        public void Libros_ValidaQueLosElementosSeanIgualesSiElCodigoEsIgual()
+        public void ClaseExtendida_ValidaQueFuncioneElPorcentaje()
         {
-
             //Arrange
+            int numero = 10;
+            int total = 100;
+            string resultado;
 
-            Libro libro1 = new Libro("En busca del tiempo perdido", "Proust, Marcel", 1922, 2, 0, 2000, "novela");
-            Libro libro2 = new Libro("La metamorfosis", "Kafka, Franz", 1915, 5, 0, 800, "novela");
-            libro1.Codigo = 1;
-            libro2.Codigo = 1;
             //Act
+            resultado = numero.CalcularPorcentaje(total);
 
             //Assert
-            Assert.AreEqual(libro1, libro2);
+            Assert.AreEqual("10%", resultado);
         }
 
         [TestMethod]

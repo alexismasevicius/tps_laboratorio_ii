@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = TestLibreria
-build_property.ProjectDir = C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\TP4\TestLibreria\
+build_property.ProjectDir = C:\Users\alexi\Desktop\ProgYLaboII\TPS\tps_laboratorio_ii\RecuperatoriosTP\TP4\TestLibreria\

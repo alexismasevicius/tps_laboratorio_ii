@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {}
+    "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+    "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+        "projectUniqueName": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
         "projectName": "BibliotecaDeClases",
-        "projectPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+        "projectPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
         "packagesPath": "C:\\Users\\alexi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\TP4\\BibliotecaDeClases\\obj\\",
+        "outputPath": "C:\\Users\\alexi\\Desktop\\ProgYLaboII\\TPS\\tps_laboratorio_ii\\RecuperatoriosTP\\TP4\\BibliotecaDeClases\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexi\\AppData\\Roaming\\NuGet\\NuGet.Config",
